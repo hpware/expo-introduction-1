@@ -1,13 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
-import { Link } from "expo-router";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Edit app/index.tsx to edit this asd.</Text>
-      <Link href="/about" style={styles.button}>
-        Go To About
-      </Link>
+      <Text style={styles.text}>About Page</Text>
     </View>
   );
 }
@@ -22,10 +18,5 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#fff",
-  },
-  button: {
-    color: "#fff",
-    fontSize: 18,
-    textDecorationLine: "underline",
   }
 })
