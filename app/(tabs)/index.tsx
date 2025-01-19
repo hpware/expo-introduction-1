@@ -10,8 +10,9 @@ import Epicker from "@/components/emojipicker";
 import EmjList from "@/components/emjlist";
 import { type ImageSource } from "expo-image";
 import EmjSticker from "@/components/emjsticker";
-import emjpicker from "@/components/emojipicker";
-
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { requestPermissionsAsync } from "expo-media-library";
+import  * as medialib from "expo-media-library";
 
 
 export default function Index() {
@@ -19,6 +20,7 @@ export default function Index() {
   const [showappoptions, setshowappoptions] = useState<boolean>(false);
   const [isemojipickeron, setemojipickero] = useState<boolean>(false);
   const [pickedemj, setpickedemj] = useState<ImageSource | undefined>(undefined);
+  const [status, requestperms] = medialib.usePermissions();
   const pickimgsync = async () => {
     let res = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ['images'],
@@ -32,6 +34,9 @@ export default function Index() {
         alert("You did not select any image.");
     }
 };
+if (status === null) {
+  requestperms();
+}
 const onreset = () => {
   setselimg(undefined);
   setpickedemj(undefined);
@@ -46,6 +51,7 @@ const closesticker = () => {
 const saveimage = async() => {
 }
   return (
+    <GestureHandlerRootView style={styles.container}>
     <View style={styles.container}>
       <View style={styles.imgcontainer}>
         <ImageViewer imgSource={PlaceholderImage} selimg={selimg}/>
@@ -69,6 +75,7 @@ const saveimage = async() => {
         <EmjList onsel={setpickedemj} onclose={closesticker}/>
       </Epicker>  
     </View>
+    </GestureHandlerRootView>
   );
 }
 

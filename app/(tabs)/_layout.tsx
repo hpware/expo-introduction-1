@@ -20,6 +20,7 @@ export default function RootLayout() {
       <Tabs.Screen name="about" options={{ title: "About", tabBarIcon: ({ color, focused }) => (
             <Ionicons name={focused ? 'information-circle' : 'information-circle-outline'} color={color} size={24}/>
           ), }}/>
+      <Tabs.Screen name="fetch" options={{title: "Fetch", tabBarIcon: ({color, focused}) => <Ionicons name={focused ? "cloud-download" : "cloud-download-outline"} color={color} size={24} /> }} />
       </Tabs>
   );
 }
