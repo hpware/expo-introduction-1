@@ -6,12 +6,18 @@ import * as ImagePicker from "expo-image-picker";
 import { useState } from "react";
 import Cbutton from "@/components/cbutton";
 import Ibutton from "@/components/ibutton";
+import Epicker from "@/components/emojipicker";
+import EmjList from "@/components/emjlist";
+import { type ImageSource } from "expo-image";
+import EmjSticker from "@/componets/emjsticker";
 
 
 
 export default function Index() {
   const [selimg, setselimg] = useState<string | undefined>(undefined);
   const [showappoptions, setshowappoptions] = useState<boolean>(false);
+  const [isemojipickeron, setemojipickero] = useState<boolean>(false);
+  const [pickedemj, setpickedemj] = useState<ImageSource | undefined>(undefined);
   const pickimgsync = async () => {
     let res = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ['images'],
@@ -29,10 +35,12 @@ const onreset = () => {
   setshowappoptions(false);
 }
 const addsticker = () => {
-
+  setemojipickero(true);
+}
+const closesticker = () => {
+  setemojipickero(false);
 }
 const saveimage = async() => {
-
 }
   return (
     <View style={styles.container}>
@@ -53,6 +61,9 @@ const saveimage = async() => {
         <Button label="Use this photo" onpress={() => setshowappoptions(true)}/>
       </View>
       )}
+      <Epicker onclose={closesticker} visible={isemojipickeron}>
+        <EmjList onsel={setpickedemj} onclose={closesticker}/>
+      </Epicker>  
     </View>
   );
 }

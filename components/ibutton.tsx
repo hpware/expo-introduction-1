@@ -10,7 +10,7 @@ export default function ibutton({icon, label, onpress} : props) {
     return (
         <Pressable onPress={onpress}>
             <MaterialIcons name={icon} size={24} color="#fff"/>
-            <Text>{label}</Text>
+            <Text style={s.label}>{label}</Text>
         </Pressable>
     )
 }
@@ -22,5 +22,7 @@ const s = StyleSheet.create({
     label: {
         color : "#fff",
         marginTop:12,
+        justifyContent: "center",
+        alignItems: "center", 
     }
 })
