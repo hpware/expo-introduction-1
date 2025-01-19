@@ -6,9 +6,9 @@ type props = {
     stickersrc: ImageSource;
 }
 
-export default function emjpicker({imgsize, stickersrc} : props) {
+export default function emjsticker({imgsize, stickersrc} : props) {
     return (
-        <View style={{top: -20}}>
+        <View style={{top: -350}}>
             <Image source={stickersrc} style={{ width: imgsize, height: imgsize}} />
         </View>
     );

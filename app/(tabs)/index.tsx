@@ -9,7 +9,7 @@ import Ibutton from "@/components/ibutton";
 import Epicker from "@/components/emojipicker";
 import EmjList from "@/components/emjlist";
 import { type ImageSource } from "expo-image";
-import EmjSticker from "@/componets/emjsticker";
+import EmjSticker from "@/components/emjsticker";
 
 
 
@@ -32,6 +32,7 @@ export default function Index() {
     }
 };
 const onreset = () => {
+  setselimg(undefined);
   setshowappoptions(false);
 }
 const addsticker = () => {
@@ -46,6 +47,7 @@ const saveimage = async() => {
     <View style={styles.container}>
       <View style={styles.imgcontainer}>
         <ImageViewer imgSource={PlaceholderImage} selimg={selimg}/>
+        {pickedemj && <EmjSticker stickersrc={pickedemj} imgsize={44} />}
       </View>
       {showappoptions ? (
         <View style={styles.optionsc}>
