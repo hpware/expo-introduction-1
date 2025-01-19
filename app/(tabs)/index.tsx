@@ -10,6 +10,7 @@ import Epicker from "@/components/emojipicker";
 import EmjList from "@/components/emjlist";
 import { type ImageSource } from "expo-image";
 import EmjSticker from "@/components/emjsticker";
+import emjpicker from "@/components/emojipicker";
 
 
 
@@ -33,6 +34,7 @@ export default function Index() {
 };
 const onreset = () => {
   setselimg(undefined);
+  setpickedemj(undefined);
   setshowappoptions(false);
 }
 const addsticker = () => {
