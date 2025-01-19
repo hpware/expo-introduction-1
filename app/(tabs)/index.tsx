@@ -3,7 +3,7 @@ const PlaceholderImage = require('@/assets/images/background-image.png');
 import ImageViewer from "@/components/ImageViewer"
 import Button from "@/components/button";
 import * as ImagePicker from "expo-image-picker";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Cbutton from "@/components/cbutton";
 import Ibutton from "@/components/ibutton";
 import Epicker from "@/components/emojipicker";
@@ -13,6 +13,7 @@ import EmjSticker from "@/components/emjsticker";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { requestPermissionsAsync } from "expo-media-library";
 import  * as medialib from "expo-media-library";
+import { captureRef } from "react-native-view-shot";
 
 
 export default function Index() {
@@ -21,6 +22,7 @@ export default function Index() {
   const [isemojipickeron, setemojipickero] = useState<boolean>(false);
   const [pickedemj, setpickedemj] = useState<ImageSource | undefined>(undefined);
   const [status, requestperms] = medialib.usePermissions();
+  const imgref = useRef<View>(null);
   const pickimgsync = async () => {
     let res = await ImagePicker.launchImageLibraryAsync({
         mediaTypes: ['images'],
@@ -49,13 +51,28 @@ const closesticker = () => {
   setemojipickero(false);
 }
 const saveimage = async() => {
+  try {
+    const localUri = await captureRef(imgref, {
+      height:400,
+      quality:1
+    });
+    await medialib.saveToLibraryAsync(localUri);
+    if (localUri) {
+      alert("Saved");
+    }
+  } catch (e) {
+    console.log(e);
+    alert(`${e}`);
+  }
 }
   return (
     <GestureHandlerRootView style={styles.container}>
     <View style={styles.container}>
       <View style={styles.imgcontainer}>
+        <View collapsable={false} ref={imgref}>
         <ImageViewer imgSource={PlaceholderImage} selimg={selimg}/>
         {pickedemj && <EmjSticker stickersrc={pickedemj} imgsize={44} />}
+        </View>
       </View>
       {showappoptions ? (
         <View style={styles.optionsc}>
